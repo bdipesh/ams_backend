@@ -29,18 +29,18 @@ describe("GET / - course Details", () => {
 
 describe('Course Add', () => {
 // the code below is for insert testing
-    it('Add Course testing', () => {
-        const course = {
-            'courseCode': '01',
-            'courseName': 'asdasd',
-
-        };
-
-        return Course.createCourse(course)
-            .then((pro_ret) => {
-                expect(pro_ret.courseName).toEqual('asdasd');
-            });
-    });
+//     it('Add Course testing', () => {
+//         const course = {
+//             'courseCode': '01',
+//             'courseName': 'asdasd',
+//
+//         };
+//
+//         return Course.createCourse(course)
+//             .then((pro_ret) => {
+//                 expect(pro_ret.courseName).toEqual('asdasd');
+//             });
+//     });
 
     // it('to test the update', async () => {
     //     return Course.updateCourseDetail({_id :Object('5e48ef6bb706075b0c87f7c1')}, {$set : {courseName:'basd'}})
@@ -51,9 +51,9 @@ describe('Course Add', () => {
     // });
 
 // the code below is for delete testing
-//     it('to test the delete book is working or not', async () => {
-//         const status = await Course.deleteCourse();
-//         expect(status.ok).toBe(1);
-// });
+    it('to test the delete book is working or not', async () => {
+        const status = await Course.deleteCourse({_id :Object('5e48ef6bb706075b0c87f7c1')});
+        expect(status.ok).toBe(0);
+});
 
 })

@@ -29,17 +29,17 @@ describe("GET / - batch Details", () => {
 
 describe('Batch Add', () => {
 // the code below is for insert testing
-    it('Add batch testing', () => {
-        const batch = {
-            'batchCode': '01',
-            'batchName': 'asdasd',
-
-        };
-        return Batch.createBatch(batch)
-            .then((pro_ret) => {
-                expect(pro_ret.batchName).toEqual('asdasd');
-            });
-    });
+//     it('Add batch testing', () => {
+//         const batch = {
+//             'batchCode': '01',
+//             'batchName': 'asdasd',
+//
+//         };
+//         return Batch.createBatch(batch)
+//             .then((pro_ret) => {
+//                 expect(pro_ret.batchName).toEqual('asdasd');
+//             });
+//     });
 
     // it('to test the update', async () => {
     //     return Batch.updateBatchDetail({_id :Object('5f02151869f48a417ce5fe10')}, {$set : {batchName:'asd'}})
@@ -50,9 +50,9 @@ describe('Batch Add', () => {
     // });
 
 // the code below is for delete testing
-//     it('to test the delete batch is working or not', async () => {
-//         const status = await Batch.deleteBatch();
-//         expect(status.ok).toBe(1);
-// });
+    it('to test the delete batch is working or not', async () => {
+        const status = await Batch.deleteBatch({_id :Object('5f02173673798100bcc762ee')});
+        expect(status.ok).toBe(0);
+});
 
 })
