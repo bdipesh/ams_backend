@@ -1,7 +1,7 @@
-import UserModel from "../models/user";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import config from "../config";
+const UserModel = require("../models/user");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("../config");
 
 class HandleLogin {
     loginWithDetails(req, res) {

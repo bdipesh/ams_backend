@@ -1,4 +1,4 @@
-import BatchModel from "../models/batch";
+const BatchModel = require("../models/batch");
 
 
 class BatchDetails {
@@ -52,4 +52,4 @@ class BatchDetails {
 
 }
 
-export default BatchDetails;
+module.exports = BatchDetails;

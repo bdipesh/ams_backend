@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import options from '../config'
+const mongoose =  require('mongoose')
+const options = require('../config')
 mongoose.connect(options.url, options.optionsForDatabase)
     .then(()=> {
         console.log("Successfully connected to database.")
@@ -8,4 +8,4 @@ mongoose.connect(options.url, options.optionsForDatabase)
         console.log("Sorry")
     })
 
-export default mongoose;
+module.exports = mongoose;

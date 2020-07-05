@@ -1,6 +1,5 @@
-import UserModel from "../models/user";
-import bcrypt from 'bcryptjs'
-import {Request, Response} from "express";
+const UserModel = require("../models/user");
+const bcrypt = require('bcryptjs')
 
 
 class UserDetails {
@@ -94,4 +93,4 @@ class UserDetails {
 
 }
 
-export default UserDetails;
+module.exports = UserDetails;

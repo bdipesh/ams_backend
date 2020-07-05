@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import config from '../config';
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 const verifyToken = (req, res, next) => {
     let token = req.headers['x-access-token'] || req.headers['authorization'];
@@ -26,4 +26,4 @@ const verifyToken = (req, res, next) => {
     if (token) {
     }
 };
-export default verifyToken;
+module.exports = verifyToken;

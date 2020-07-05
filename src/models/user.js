@@ -1,5 +1,5 @@
-import mongoose from '../bin/connections'
-import course from "./course";
+const mongoose = require('../bin/connections')
+const course = require("./course")
 
 const schema = {
     name: {
@@ -136,4 +136,4 @@ const deleteUser = (userId) => {
     })
 }
 
-export default {deleteUser, findUserDetail, createUser, getAllUsers, getUserByEmail, updateUserDetail}
+module.exports = {deleteUser, findUserDetail, createUser, getAllUsers, getUserByEmail, updateUserDetail}

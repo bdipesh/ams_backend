@@ -1,4 +1,4 @@
-import mongoose from '../bin/connections'
+const mongoose = require('../bin/connections')
 
 const schemaCourse = {
     courseCode: {
@@ -72,7 +72,7 @@ const deleteCourse = (courseId) => {
     })
 }
 
-export default {
+module.exports = {
     deleteCourse,
     getAllCourse,
     createCourse,

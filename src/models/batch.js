@@ -1,4 +1,4 @@
-import mongoose from '../bin/connections'
+const mongoose = require('../bin/connections')
 
 const schemaBatch = {
     batchCode: {
@@ -72,7 +72,7 @@ const deleteBatch = (batchId) => {
         })
     })
 }
-export default {
+module.exports = {
     deleteBatch,
     updateBatchDetail,
     createBatch,

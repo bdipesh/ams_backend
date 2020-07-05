@@ -47,4 +47,4 @@ router.post('/', fileUpload.any(),
 router.post('/get-token', handleLogin.loginWithDetails);
 
 
-export default router;
+module.exports =  router;

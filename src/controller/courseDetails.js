@@ -1,4 +1,4 @@
-import  CourseModel from "../models/course";
+const  CourseModel = require("../models/course")
 
 
 class CourseDetails {
@@ -54,4 +54,4 @@ class CourseDetails {
 
 }
 
-export default CourseDetails;
+module.exports = CourseDetails;
