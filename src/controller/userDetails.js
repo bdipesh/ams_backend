@@ -38,7 +38,7 @@ class UserDetails {
             dob: req.body.dob,
             gender: req.body.gender,
             phone: req.body.phone,
-            picture:  req.files.length ? req.files[0].filename : defaultImages[req.body.gender],
+            picture:  req.files && req.files.length ? req.files[0].filename : defaultImages[req.body.gender],
             batch: req.body.batch,
             course: req.body.course,
             role: req.body.role
