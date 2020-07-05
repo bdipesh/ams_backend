@@ -1,4 +1,3 @@
-import app from "../app";
 const user = require("../models/user");
 
 describe("GET / - User Details", () => {
