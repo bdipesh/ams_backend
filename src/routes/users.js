@@ -2,13 +2,11 @@ const express = require('express');
 const router = express.Router();
 const userDetails = require('../controller/userDetails')
 const { check, validationResult }  = require('express-validator');
-import checkAuth from '../middleware/checkAuth'
+const checkAuth =require( '../middleware/checkAuth')
 const fileUpload = require('../middleware/imageUpload')
 const authentication = require('../controller/authentication')
 const handleLogin = new authentication();
 const details = new userDetails();
-
-
 
 router.get('/', details.userList);
 router.get('/:id', [details.findOneUser]);
