@@ -1,6 +1,7 @@
 // use the path of your model
 const Batch = require('../models/batch');
 const mongoose = require('mongoose');
+let updateId = ''
 // use the new name of the database
 const url = 'mongodb://localhost:27017/testDatabase';
 beforeAll(async () => {
@@ -11,7 +12,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-
     await mongoose.connection.close();
 });
 describe("GET / - batch Details", () => {
@@ -28,31 +28,31 @@ describe("GET / - batch Details", () => {
 });
 
 describe('Batch Add', () => {
-// the code below is for insert testing
-//     it('Add batch testing', () => {
-//         const batch = {
-//             'batchCode': '01',
-//             'batchName': 'asdasd',
-//
-//         };
-//         return Batch.createBatch(batch)
-//             .then((pro_ret) => {
-//                 expect(pro_ret.batchName).toEqual('asdasd');
-//             });
-//     });
+    it('Add batch testing', () => {
+        const batch = {
+            'batchCode': '05',
+            'batchName': 'kiran',
 
-    // it('to test the update', async () => {
-    //     return Batch.updateBatchDetail({_id :Object('5f02151869f48a417ce5fe10')}, {$set : {batchName:'asd'}})
-    //         .then((pp)=>{
-    //             expect(pp.batchName).toEqual('asd')
-    //         })
-    //
-    // });
+        };
+        return Batch.createBatch(batch)
+            .then((pro_ret) => {
+                updateId = pro_ret._id
+                expect(pro_ret.batchName).toEqual('kiran');
+            });
+    });
+
+    it('to test the update', async () => {
+        return Batch.updateBatchDetail({_id :Object(updateId)}, {$set : {batchName:'dipesh'}})
+            .then((pp)=>{
+                expect(pp.$set.batchName).toEqual('dipesh')
+            })
+
+    });
 
 // the code below is for delete testing
     it('to test the delete batch is working or not', async () => {
-        const status = await Batch.deleteBatch({_id :Object('5f02173673798100bcc762ee')});
-        expect(status.ok).toBe(0);
+        const res = await Batch.deleteBatch({_id :Object(updateId)});
+        expect(res._id.toString()).toBe(updateId.toString());
 });
 
 })

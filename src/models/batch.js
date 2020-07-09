@@ -55,7 +55,7 @@ const updateBatchDetail = (batchId, batchData) => {
                 reject(error);
             }
             else {
-                resolve(response)
+                resolve(batchData)
             }
         });
     })

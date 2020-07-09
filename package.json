@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node src/bin/www"
+    "start": "node src/bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
