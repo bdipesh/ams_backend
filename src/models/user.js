@@ -117,7 +117,7 @@ const updateUserDetail = (userId, userData) => {
                 reject(error);
             }
             else {
-                resolve(response)
+                resolve(userData)
             }
         });
     })
