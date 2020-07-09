@@ -54,7 +54,7 @@ const updateCourseDetail = (courseId, courseData) => {
                 reject(error);
             }
             else {
-                resolve(response)
+                resolve(courseData)
             }
         });
     })

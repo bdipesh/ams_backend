@@ -3,6 +3,7 @@ const Course = require('../models/course');
 const mongoose = require('mongoose');
 // use the new name of the database
 const url = 'mongodb://localhost:27017/testDatabase';
+let updateId = ''
 beforeAll(async () => {
     await mongoose.connect(url, {
         useNewUrlParser: true,
@@ -16,11 +17,8 @@ afterAll(async () => {
 });
 describe("GET / - course Details", () => {
     it("course get function test", async () => {
-        const req = {
-            limit: 10, offset:0
-        }
         const res = {}
-        await Course.getAllCourse(req, res)
+        await Course.getAllCourse(10)
             .then((response)=> {
                 expect(typeof response).toBe('object');
             })
@@ -28,32 +26,32 @@ describe("GET / - course Details", () => {
 });
 
 describe('Course Add', () => {
-// the code below is for insert testing
-//     it('Add Course testing', () => {
-//         const course = {
-//             'courseCode': '01',
-//             'courseName': 'asdasd',
-//
-//         };
-//
-//         return Course.createCourse(course)
-//             .then((pro_ret) => {
-//                 expect(pro_ret.courseName).toEqual('asdasd');
-//             });
-//     });
+    it('Add Course testing', () => {
+        const course = {
+            'courseCode': '01',
+            'courseName': 'asdasd',
 
-    // it('to test the update', async () => {
-    //     return Course.updateCourseDetail({_id :Object('5e48ef6bb706075b0c87f7c1')}, {$set : {courseName:'basd'}})
-    //         .then((pp)=>{
-    //             expect(pp.courseName).toEqual('basd')
-    //         })
-    //
-    // });
+        };
+
+        return Course.createCourse(course)
+            .then((pro_ret) => {
+                updateId = pro_ret._id
+                expect(pro_ret.courseName).toEqual('asdasd');
+            });
+    });
+
+    it('to test the update', async () => {
+        return Course.updateCourseDetail({_id :Object(updateId)}, {$set : {courseName:'basd'}})
+            .then((pp)=>{
+                expect(pp.$set.courseName).toEqual('basd')
+            })
+
+    });
 
 // the code below is for delete testing
     it('to test the delete book is working or not', async () => {
-        const status = await Course.deleteCourse({_id :Object('5e48ef6bb706075b0c87f7c1')});
-        expect(status.ok).toBe(0);
+        const status = await Course.deleteCourse({_id :Object(updateId)});
+        expect(status._id.toString()).toBe(updateId.toString());
 });
 
 })
