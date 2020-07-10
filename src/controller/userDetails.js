@@ -10,7 +10,8 @@ class UserDetails {
         if (req.query) {
             filters = {
                 batch: req.query.batch,
-                course: req.query.course
+                course: req.query.course,
+                role: req.query.role
             }
             if (req.query.page) {
                 req.query.page = parseInt(req.query.page);
