@@ -93,7 +93,7 @@ const updateAttendanceDetail = (attendanceId, attendanceData) => {
                 reject(error);
             }
             else {
-                resolve(response)
+                resolve(attendanceData)
             }
         });
     })
