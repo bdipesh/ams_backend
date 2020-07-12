@@ -32,7 +32,7 @@ describe("GET / - attendance Details per User", () => {
     });
 });
 
-describe("GET / - attendance Details per Use", () => {
+describe("GET / - attendance Details per Course", () => {
     it("Attendance get function test", async () => {
         await Attendance.getAttendanceByCourse('5f021920e39f3b3fd899203d')
             .then((response)=> {
