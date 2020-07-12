@@ -5,18 +5,15 @@ const { check, validationResult } =require( 'express-validator')
 const checkAuth =require( '../middleware/checkAuth')
 const details = new attendanceDetails()
 
-
-
-router.get('/', details.getAllAttendance());
+router.get('/', details.attendanceList);
 router.delete('/:id', details.deleteAttendance);
 
-
-router.put('/:id',  details.updateAttendanceDetail());
+router.put('/:id',  details.updateAttendance);
 router.post('/',
-    details.createAttendance());
+    details.createNewAttendance);
 router.get('/student',
-    details.getAttendanceByUser());
+    details.attendanceUserList);
 router.get('/course',
-    details.getAttendanceByCourse());
+    details.attendanceCourseList);
 
 module.exports= router;

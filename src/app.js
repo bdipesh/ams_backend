@@ -5,7 +5,7 @@ const cors =  require('cors')
 const courseRoutes = require('../src/routes/course')
 const batchRoutes = require('../src/routes/batch')
 const userRoutes = require('../src/routes/users')
-
+const attendanceRoutes = require('../src/routes/attendance')
 
 const app = express();
 app.use(cors());
@@ -20,6 +20,6 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/batch', batchRoutes);
 app.use('/api/v1/course', courseRoutes);
 // app.use('/api/v1/notice', noticeRoutes);
-// app.use('/api/v1/attendance', attendanceRoutes);
+app.use('/api/v1/attendance', attendanceRoutes);
 
 module.exports = app;
