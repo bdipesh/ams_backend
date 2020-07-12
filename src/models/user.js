@@ -54,11 +54,14 @@ const userSchema = new mongoose.Schema(schema);
 const User = mongoose.model(collectionName, userSchema);
 
 
+
 const getAllUsers = (limit, offset, filters) => {
-    const conditions = filters && (filters.batch || filters.course ) ? {batch: filters.batch || '', course: {$in: filters.course}} : {}
+    const course = filters &&  filters.course  ? { course: {"$regex": filters.course, "$options": "i"}} : {}
     const role = filters && filters.role ? { role: filters.role} : {}
+    const batch = filters && filters.batch ? { batch: filters.batch} : {}
+    console.log(course)
     return new Promise((resolve, reject) => {
-        User.find({...conditions, ...role})
+        User.find({...course,...batch, ...role})
             .then( (users) => {
                 resolve(users || 'not');
             })

@@ -46,12 +46,13 @@ const getAllAttendance = (perPage, page, filters) => {
 
 }
 
-const getAttendanceByUser = (userId, courseId) => {
-    console.log(courseId)
+const getAttendanceByUser = (filters = null) => {
+    const course = filters &&  filters.course  ? { courseId: {$in: filters.course}} : {}
+    const batch = filters && filters.batch ? { batchId: {"$regex": filters.batch, "$options": "i"}} : {}
+    const student = filters && filters.student ? { studentId: {$in: filters.student}} : {}
     return new Promise((resolve, reject) => {
-        Attendance.find()
-            .where({'courseId': courseId, 'studentId': `${userId}`})
-            // .populate('studentId')
+        Attendance.find({...course, ...batch, ...student})
+            .populate('studentId')
             .limit(100)
             .then((response) => {
                 resolve(response)

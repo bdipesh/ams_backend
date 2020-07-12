@@ -26,7 +26,12 @@ class AttendanceDetails {
             })
     }
     attendanceUserList (req, res) {
-        AttendanceModel.getAttendanceByUser(req.query.student, req.query.course)
+        const filter = {
+            course: req.query.course || '',
+            batch: req.query.batch || '',
+            student: req.query.student || ''
+        }
+        AttendanceModel.getAttendanceByUser(filter)
             .then((result) => {
                 res.status(200).json(result);
             })

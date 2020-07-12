@@ -67,13 +67,13 @@ class UserDetails {
             //password: req.body.password,
             dob: req.body.dob,
             phone: req.body.phone,
-            //batch: req.body.batch,
-            //course: req.body.course,
+            batch: req.body.batch,
+            course: req.body.course,
             //role: req.body.role
         }
-        UserModel.updateUserDetail(req.params.id, userData)
+        UserModel.updateUserDetail({_id: Object(req.params.id)}, {$set: userData} )
             .then((result) => {
-                res.status(201).send({id});
+                res.status(201).send({result});
             });
     }
 
