@@ -6,6 +6,7 @@ const courseRoutes = require('../src/routes/course')
 const batchRoutes = require('../src/routes/batch')
 const userRoutes = require('../src/routes/users')
 const attendanceRoutes = require('../src/routes/attendance')
+// const noticeRoutes = require('../src/routes/notice')
 
 const app = express();
 app.use(cors());
