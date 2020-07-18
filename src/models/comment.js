@@ -1,4 +1,6 @@
 const mongoose = require('../bin/connections')
+const user =require("./user");
+const notice=require("./notice");
 
 const schemaComment={
     noticeid:{
@@ -34,11 +36,11 @@ const createComment = (commentData) => {
     })
 }
 
-const getAllComment = (perPage, page, filters) => {
+const getAllComment = (limit) => {
     return new Promise((resolve, reject) => {
         Comment.find()
             .populate('userid')
-            .skip(page)
+            .limit(limit)
             .exec(function (err, notice) {
                 if (err) {
                     reject(err);

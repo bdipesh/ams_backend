@@ -1,23 +1,21 @@
 const  CommentModel =require( "../models/comment");
-const {Request, Response} =require( "express");
-const common =require( "../middleware/common");
 
 class commentDetails {
     commentList (req, res) {
         const limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
-        let page = 0;
-        let filters = ""
-        if (req.query) {
-            if(req.query.name){
-                filters = req.query.name
-            }
-            if (req.query.page) {
-                req.query.page = parseInt(req.query.page);
-                page = Number.isInteger(req.query.page) ? req.query.page : 0;
-            }
-        }
+        // let page = 0;
+        // let filters = ""
+        // if (req.query) {
+        //     if(req.query.name){
+        //         filters = req.query.name
+        //     }
+        //     if (req.query.page) {
+        //         req.query.page = parseInt(req.query.page);
+        //         page = Number.isInteger(req.query.page) ? req.query.page : 0;
+        //     }
+        // }
 
-        CommentModel.getAllComment(limit, page, filters)
+        CommentModel.getAllComment(limit)
             .then((result) => {
                 res.status(200).json(
                     result
