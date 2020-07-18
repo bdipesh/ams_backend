@@ -23,6 +23,14 @@ router.put('/:id', validateNotice(),  (req, res) => {
         details.updateNotice(req, res)
     }
 });
+router.put('/like/:id',  (req, res) => {
+    const errors = validationResult(req)
+    if(!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array()})
+    } else {
+        details.likeNotice(req, res)
+    }
+});
 router.post('/',
     checkAuth,
     validateNotice(), (req, res) => {

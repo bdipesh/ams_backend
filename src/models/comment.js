@@ -3,7 +3,7 @@ const user =require("./user");
 const notice=require("./notice");
 
 const schemaComment={
-    noticeid:{
+    noticeId:{
         type: mongoose.SchemaTypes.String,
         ref: 'notice'
     },
@@ -36,10 +36,11 @@ const createComment = (commentData) => {
     })
 }
 
-const getAllComment = (limit) => {
+const getAllComment = (limit, offset, filters) => {
     return new Promise((resolve, reject) => {
-        Comment.find()
+        Comment.find({noticeId: {"$regex": filters, "$options": "i"}})
             .populate('userid')
+            .skip(offset)
             .limit(limit)
             .exec(function (err, notice) {
                 if (err) {

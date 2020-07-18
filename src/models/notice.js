@@ -13,16 +13,11 @@ const schemaNotice = {
         type: Date,
         default: Date.now()
     },
-    file: [{type: String}],
-    feedBack: [{
-        users: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
-        },
-        feedback: {
-            type: String,
-        }}
-    ]
+    like: {
+        type: String,
+        default: ''
+    },
+    file: [{type: String}]
 };
 const collectionName = "notice";
 const noticeSchema = new mongoose.Schema(schemaNotice);

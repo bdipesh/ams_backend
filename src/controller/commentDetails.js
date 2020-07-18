@@ -3,19 +3,16 @@ const  CommentModel =require( "../models/comment");
 class commentDetails {
     commentList (req, res) {
         const limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
+        const offset = req.query.offset ? parseInt(req.query.offset) : 0;
         // let page = 0;
-        // let filters = ""
-        // if (req.query) {
-        //     if(req.query.name){
-        //         filters = req.query.name
-        //     }
-        //     if (req.query.page) {
-        //         req.query.page = parseInt(req.query.page);
-        //         page = Number.isInteger(req.query.page) ? req.query.page : 0;
-        //     }
-        // }
+        let filters = ""
+        if (req.query) {
+            if(req.query.noticeId){
+                filters = req.query.noticeId
+            }
+        }
 
-        CommentModel.getAllComment(limit)
+        CommentModel.getAllComment(limit, offset, filters)
             .then((result) => {
                 res.status(200).json(
                     result
@@ -25,9 +22,8 @@ class commentDetails {
     async createNewComment (req, res) {
         const commentData = {
             comment: req.body.comment,
-            noticeid: req.body.noticeid,
-            userid:req.body.userid,
-            like:req.body.like
+            noticeId: req.body.noticeId,
+            userid:req.body.userid
         }
         CommentModel.createComment(commentData)
             .then((result) => {

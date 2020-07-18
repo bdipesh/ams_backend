@@ -6,7 +6,7 @@ const checkAuth =require('../middleware/checkAuth')
 const details = new commentDetails()
 
 
-router.get('/', [details.commentList()]);
+router.get('/', [details.commentList]);
 
 const validateComment = () => {
     return [

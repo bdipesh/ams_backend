@@ -1,6 +1,4 @@
 const  NoticeModel =require( "../models/notice");
-const {Request, Response} =require( "express");
-const common =require( "../middleware/common");
 
 class NoticeDetails {
     noticeList (req, res) {
@@ -37,15 +35,22 @@ class NoticeDetails {
     }
     updateNotice (req, res) {
         const noticeData = {
-            noticeCode: req.body.noticeCode,
-            noticeName: req.body.noticeName
+            notice: req.body.notice
         }
         NoticeModel.updateNoticeDetail(req.params.id, noticeData)
             .then((result) => {
                 res.status(201).send({id: result});
             });
     }
-
+    likeNotice (req, res) {
+        const noticeData = {
+            like: req.body.like
+        }
+        NoticeModel.updateNoticeDetail(req.params.id, noticeData)
+            .then((result) => {
+                res.status(201).send({id: result});
+            });
+    }
 
     deleteNotice (req, res) {
         NoticeModel.deleteNotice(req.params.id)
