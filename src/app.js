@@ -7,6 +7,7 @@ const batchRoutes = require('../src/routes/batch')
 const userRoutes = require('../src/routes/users')
 const attendanceRoutes = require('../src/routes/attendance')
 const noticeRoutes = require('../src/routes/notice')
+const commentRoutes=require('../src/routes/comment')
 
 const app = express();
 app.use(cors());
@@ -22,5 +23,6 @@ app.use('/api/v1/batch', batchRoutes);
 app.use('/api/v1/course', courseRoutes);
 app.use('/api/v1/notice', noticeRoutes);
 app.use('/api/v1/attendance', attendanceRoutes);
+app.use('/api/v1/comment', commentRoutes);
 
 module.exports = app;
