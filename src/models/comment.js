@@ -37,8 +37,10 @@ const createComment = (commentData) => {
 }
 
 const getAllComment = (limit, offset, filters) => {
+    let condition = filters?{noticeId: {"$regex": filters, "$options": "i"}}:{}
     return new Promise((resolve, reject) => {
-        Comment.find({noticeId: {"$regex": filters, "$options": "i"}})
+
+        Comment.find({...condition})
             .populate('userid')
             .skip(offset)
             .limit(limit)

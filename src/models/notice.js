@@ -57,13 +57,14 @@ const createNotice = (noticeData) => {
 }
 
 const updateNoticeDetail = (noticeId, noticeData) => {
+
     return new Promise((resolve, reject)=> {
         Notice.findByIdAndUpdate(noticeId, noticeData,(error, response) => {
             if(error){
                 reject(error);
             }
             else {
-                resolve(response)
+                resolve(noticeData)
             }
         });
     })
