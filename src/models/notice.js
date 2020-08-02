@@ -17,6 +17,10 @@ const schemaNotice = {
         type: String,
         default: ''
     },
+    likedUser: {
+        type: Array,
+        default: []
+    },
     file: [{type: String}]
 };
 const collectionName = "notice";
@@ -29,6 +33,7 @@ const getAllNotice = (perPage, page, filters) => {
         Notice.find()
             .populate('createdBy')
             .skip(page)
+            .sort('-createdAt')
             .exec(function (err, notice) {
                 if (err) {
                     reject(err);

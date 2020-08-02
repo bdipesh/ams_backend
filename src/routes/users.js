@@ -43,7 +43,7 @@ router.post('/', fileUpload.any(),
         }
 
     });
-router.put('/:id',details.updatepassword());
+router.put('/:id', details.updatepassword);
 router.post('/get-token', handleLogin.loginWithDetails);
 
 

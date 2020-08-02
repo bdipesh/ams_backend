@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node src/bin/www",
-    "test": "jest"
+    "test": "jest",
+    "dev": "node src/bin/www"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",

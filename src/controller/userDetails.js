@@ -78,7 +78,7 @@ class UserDetails {
     }
     updatepassword(req,res){
         const password={
-            password:bcrypt.hashSync(req.body.password)
+            password: bcrypt.hashSync(req.body.password)
         }
         UserModel.updatePassword({_id: Object(req.params.id)},{$set:password})
             .then((result)=>{

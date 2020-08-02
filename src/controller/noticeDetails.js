@@ -44,8 +44,10 @@ class NoticeDetails {
     }
     likeNotice (req, res) {
         const noticeData = {
-            like: req.body.like
+            like: req.body.like,
+            likedUser: req.body.likedUser
         }
+        console.log(req.body)
         NoticeModel.updateNoticeDetail(req.params.id, noticeData)
             .then((result) => {
                 res.status(201).send({id: result});
