@@ -54,6 +54,15 @@ describe('User Add', () => {
 
     });
 
+    it('to test the update password', async () => {
+        return userModel.updatePassword({_id :Object(updateId)}, {$set : {password:'asdasd'}})
+            .then((response)=>{
+                console.log(response)
+                expect(response.$set.password).toEqual('asdasd')
+            })
+
+    });
+
 // the code below is for delete testing
     it('to test the delete book is working or not', async () => {
         const status = await userModel.deleteUser({_id :Object(updateId)});

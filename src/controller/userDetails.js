@@ -76,7 +76,15 @@ class UserDetails {
                 res.status(201).send({result});
             });
     }
-
+    updatepassword(req,res){
+        const password={
+            password:bcrypt.hashSync(req.body.password)
+        }
+        UserModel.updatePassword({_id: Object(req.params.id)},{$set:password})
+            .then((result)=>{
+                res.status(201).send({result});
+            })
+    }
     findOneUser (req, res) {
         UserModel.findUserDetail(req.params.id)
             .then((result)=> {

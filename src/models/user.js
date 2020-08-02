@@ -126,6 +126,19 @@ const updateUserDetail = (userId, userData) => {
     })
 }
 
+const updatePassword=(userId, password)=>{
+    return new Promise((resolve,reject)=>{
+        User.findByIdAndUpdate(userId, password,(error,response)=>{
+            if(error){
+                reject(error);
+            }
+            else {
+                resolve(password)
+            }
+        })
+    })
+}
+
 const deleteUser = (userId) => {
     return new Promise((resolve, reject)=> {
         User.findByIdAndRemove(userId, (error, response) => {
@@ -138,4 +151,4 @@ const deleteUser = (userId) => {
     })
 }
 
-module.exports = {deleteUser, findUserDetail, createUser, getAllUsers, getUserByEmail, updateUserDetail}
+module.exports = {deleteUser, findUserDetail,updatePassword, createUser, getAllUsers, getUserByEmail, updateUserDetail}
