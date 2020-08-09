@@ -29,7 +29,9 @@ class AttendanceDetails {
         const filter = {
             course: req.query.course || '',
             batch: req.query.batch || '',
-            student: req.query.student || ''
+            student: req.query.student || '',
+            start_date: req.query.start_date || '',
+            end_date: req.query.end_date || ''
         }
         AttendanceModel.getAttendanceByUser(filter)
             .then((result) => {

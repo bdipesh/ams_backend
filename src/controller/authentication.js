@@ -1,5 +1,5 @@
 const UserModel = require("../models/user");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("../config");
 
@@ -10,23 +10,24 @@ class HandleLogin {
         UserModel.getUserByEmail(email)
             .then((result) => {
                 if (result) {
-                    bcrypt.compare(password, result.password).then( (success) => {
-                        const token = jwt.sign({
-                            exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                            data: result}, config.secret)
-                        res.status(200).send({
-                            success: true,
-                            token: token,
-                            status: "Logged in successful"
-                        })
-                    })
-                        .catch((err) => {
-                            if(err) {
-                                console.log('here jj')
-                                res.status(400).send({message: "Password does not match.", error: err})
-                            }
-                        })
-                } else {
+                    bcrypt.compare(password, result.password, function (err, success)   {
+                        if(!success) {
+                            res.status(400).send({message: "Password does not match.", error: err})
+                        }
+
+                        if(success) {
+                            const token = jwt.sign({
+                                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                                data: result}, config.secret)
+                            res.status(200).send({
+                                success: true,
+                                token: token,
+                                status: "Logged in successful"
+                            })
+                        }
+
+                } )
+                }else {
                     res.status(400).send({message: "Invalid Login details."})
                 }
             })

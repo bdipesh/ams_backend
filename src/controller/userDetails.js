@@ -1,5 +1,5 @@
 const UserModel = require("../models/user");
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 
 
 class UserDetails {
@@ -35,7 +35,7 @@ class UserDetails {
         const userData = {
             name: req.body.name,
             email: req.body.email,
-            password: bcrypt.hashSync(req.body.password),
+            password: bcrypt.hashSync(req.body.password, 10),
             dob: req.body.dob,
             gender: req.body.gender,
             phone: req.body.phone,
@@ -77,12 +77,32 @@ class UserDetails {
             });
     }
     updatepassword(req,res){
-        const password={
-            password: bcrypt.hashSync(req.body.password)
-        }
-        UserModel.updatePassword({_id: Object(req.params.id)},{$set:password})
-            .then((result)=>{
-                res.status(201).send({result});
+        let email = req.body.email
+        let password = req.body.oldPassword
+        console.log(req.body)
+        UserModel.getUserByEmail(email)
+            .then((response) => {
+                bcrypt.compare(password, response.password, function (err, success)   {
+                    if(!success) {
+                        res.status(400).send({message: "Old Password does not match.", error: err})
+                    }
+
+                    if(success) {
+                        const dataToPost={
+                            password: bcrypt.hashSync(req.body.newPassword, 10)
+                        }
+
+                        UserModel.updatePassword({_id: Object(req.params.id)},{$set:dataToPost})
+                            .then((result)=>{
+                                res.status(201).send({result});
+                            })
+                        res.status(200).send({
+                            success: true,
+                            status: "Successfully Change Password"
+                        })
+                    }
+
+                } )
             })
     }
     findOneUser (req, res) {

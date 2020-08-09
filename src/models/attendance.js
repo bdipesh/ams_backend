@@ -50,10 +50,16 @@ const getAttendanceByUser = (filters = null) => {
     const course = filters &&  filters.course  ? { courseId: {$in: filters.course}} : {}
     const batch = filters && filters.batch ? { batchId: {"$regex": filters.batch, "$options": "i"}} : {}
     const student = filters && filters.student ? { studentId: {$in: filters.student}} : {}
+    let date = {}
+    if(filters && filters.start_date && filters.end_date) {
+         date = { date: { $gte:  Date.parse(filters.start_date), $lte: Date.parse(filters.end_date)}}
+    }
+
     return new Promise((resolve, reject) => {
-        Attendance.find({...course, ...batch, ...student})
+        Attendance.find({...course, ...batch, ...student, ...date})
             .populate('studentId')
             .limit(100)
+            .sort('-date')
             .then((response) => {
                 resolve(response)
             }).catch((error) => {
