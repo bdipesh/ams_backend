@@ -1,5 +1,7 @@
 const UserModel = require("../models/user");
 const bcrypt = require('bcrypt')
+const ExcelJs = require('exceljs');
+const readXlsxFile = require("read-excel-file/node");
 
 
 class UserDetails {
@@ -59,6 +61,93 @@ class UserDetails {
                     })
             }
         })
+    }
+    createManyUsers (req, res) {
+        try {
+            if (req.file === undefined) {
+                return res.status(400).send({message: "Please upload an excel file!"});
+            }
+            console.log(req.body)
+            let path =
+               `./uploads/${req.file.filename}`;
+
+            readXlsxFile(path).then((rows) => {
+                // skip header
+                rows.shift();
+
+                let users = [];
+
+                rows.forEach((row) => {
+                    let user = {
+                        name: row[1],
+                        email: row[2],
+                        gender: row[3],
+                        dob: row[4],
+                        phone: row[5],
+                        role: req.body.role,
+                        course: req.body.course,
+                        batch: req.body.batch,
+                        password: 'hellonepal'
+                    };
+                    users.push(user);
+                });
+
+                UserModel.CreateManyUser(users)
+                    .then(() => {
+                        res.status(200).send({
+                            message: "Uploaded the file successfully: " + req.file.originalname,
+                        });
+                    })
+                    .catch((error) => {
+                        res.status(500).send({
+                            message: "Fail to import data into database!",
+                            error: error.message,
+                        });
+                    });
+            });
+        } catch (error) {
+            console.log('Fuck You');
+            res.status(500).send({
+                message: "Could not upload the file: " + req.file.originalname,
+            });
+        }
+    }
+    async getSampleFile (req, res) {
+        try {
+            // const users = [{
+            //     name: 'Suman Katwal',
+            //     email: 'suman@gmail.com',
+            //     gender: 'Male',
+            //     phone: '983938393',
+            //     dob: '2/3/2020',
+            //     role: 'Teacher'
+            // }]
+            // const workbook = new ExcelJs.Workbook();
+            // const worksheet = workbook.addWorksheet('My Users');
+            // worksheet.columns = [
+            //     {header: 'S.no', key: 's_no', width: 10},
+            //     {header: 'Name', key: 'name', width: 10},
+            //     {header: 'Email', key: 'email', width: 10},
+            //     {header: 'Gender', key: 'gender', width: 10},
+            //     {header: 'Phone', key: 'phone', width: 10},
+            //     {header: 'dob', key: 'dob', width: 10},
+            //     {header: 'role', key: 'role', width: 10},
+            // ];
+            // let count = 1;
+            // users.forEach(user => {
+            //     user.s_no = count;
+            //     worksheet.addRow(user);
+            //     count += 1;
+            // });
+            // worksheet.getRow(1).eachCell((cell) => {
+            //     cell.font = {bold: true};
+            // });
+            const file = `${__dirname}/users.xlsx`
+            res.download(file)
+            res.send('done');
+        } catch (e) {
+            res.status(500).send(e);
+        }
     }
     updateUsers (req, res) {
         const userData = {

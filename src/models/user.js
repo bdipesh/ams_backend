@@ -101,6 +101,17 @@ const createUser = (userData) => {
 
 }
 
+const CreateManyUser = (userData) => {
+    return new Promise((resolve, reject) => {
+        User.insertMany(userData, (error, response) => {
+            if(error) {
+                reject(error);
+            }
+            resolve(response)
+        })
+    })
+}
+
 const findUserDetail = (userId) => {
     return new Promise((resolve, reject)=> {
         User.findById( userId, (error, response)=>  {
@@ -151,4 +162,4 @@ const deleteUser = (userId) => {
     })
 }
 
-module.exports = {deleteUser, findUserDetail,updatePassword, createUser, getAllUsers, getUserByEmail, updateUserDetail}
+module.exports = {deleteUser, CreateManyUser, findUserDetail,updatePassword, createUser, getAllUsers, getUserByEmail, updateUserDetail}

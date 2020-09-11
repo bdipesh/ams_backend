@@ -5,6 +5,7 @@ const { check, validationResult }  = require('express-validator');
 const checkAuth =require( '../middleware/checkAuth')
 const fileUpload = require('../middleware/imageUpload')
 const authentication = require('../controller/authentication')
+const upload = require("../middleware/uploads");
 const handleLogin = new authentication();
 const details = new userDetails();
 
@@ -45,6 +46,10 @@ router.post('/', fileUpload.any(),
     });
 router.put('/:id', details.updatepassword);
 router.post('/get-token', handleLogin.loginWithDetails);
+router.post('/import/excel', upload.single('files'), (req, res) => {
+    details.createManyUsers(req, res)
+})
+router.get('/import/sample', details.getSampleFile)
 
 
 module.exports =  router;
