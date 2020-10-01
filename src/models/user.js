@@ -37,7 +37,7 @@ const schema = {
     role: {
         type: mongoose.SchemaTypes.String,
         required: true,
-        enum: ['Teacher', 'Student']
+        enum: ['Teacher', 'Student', 'Admin']
     },
     phone: {
         type: mongoose.SchemaTypes.String,
